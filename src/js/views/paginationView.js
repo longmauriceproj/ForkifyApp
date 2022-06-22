@@ -20,13 +20,21 @@ class PaginationView extends View {
     return `
         <button data-goto="${pageNum}" 
             class="btn--inline pagination__btn--${btnType}">
+            ${
+              btnType === 'next'
+                ? `
             <span>Page ${pageNum}</span>
             <svg class="search__icon">
                 <use href="${icons}#icon-arrow-${arrowDir}"></use>
+            </svg>`
+                : `
+            <svg class="search__icon">
+                <use href="${icons}#icon-arrow-${arrowDir}"></use>
             </svg>
+            <span>Page ${pageNum}</span>`
+            }
         </button>
     `;
-    //NOTE: still needs work: the prev button should swap the arrow and page number position on the button (span and svg element has to flip)
   }
 
   _generateMarkup() {
