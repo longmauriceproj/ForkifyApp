@@ -18,7 +18,7 @@ const timeout = function (s) {
 
 ///////////////////////////////////////
 
-const controlRecipe = async function () {
+const controlRecipes = async function () {
   try {
     //get hash from url
     const id = window.location.hash.slice(1);
@@ -37,8 +37,7 @@ const controlRecipe = async function () {
   }
 };
 
-['hashchange', 'load'].forEach(ev =>
-  window.addEventListener(ev, controlRecipe)
-);
-// window.addEventListener('hashchange', showRecipe);
-// window.addEventListener('load', showRecipe);
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+};
+init();
