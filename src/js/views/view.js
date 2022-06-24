@@ -15,13 +15,16 @@ export default class View {
   }
 
   update(data) {
+    //companion function to render() that will limit the elements that the DOM will reloaded to only those that have changed. More performant.
     this._data = data;
     const newMarkup = this._generateMarkup();
-
+    //convert the text and tags in the newMarkup string to a document fragment (a lightweight version of the document that is not part of the active document tree struc)
     const newDOM = document.createRange().createContextualFragment(newMarkup);
+    //creates a shallow copied array instance from the node list representing a list of the document fragment's elements
     const newElements = Array.from(newDOM.querySelectorAll('*'));
+    //creates a shallow copied array instance from the node list representing a lits of the elements contained in the parent element.
     const curElements = Array.from(this._parentElement.querySelectorAll('*'));
-
+    //compare the two array instances
     newElements.forEach((newEl, i) => {
       const curEl = curElements[i];
       //updates changed TEXT
